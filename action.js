@@ -7,6 +7,10 @@ if (process.env.INPUT_CONFIG_FILE) {
 }
 
 // Start Mergeable using the Probot Actions Adapter
-const adapt = require('probot-actions-adapter')
-const probot = require('./index') // Mergeable
-adapt(probot)
+const { run } = require('@probot/adapter-github-actions')
+const app = require("./app");
+
+run(app).catch((error) => {
+  console.error(error);
+  process.exit(1);
+});
